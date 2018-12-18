@@ -20,30 +20,7 @@ var displayAnswerSeconds = 3;
 var gameLength; 
 
 
-// setup the timers
-function showTimer(){
-	if (timeToGuess >= 0){
-		$("#timer").html(timeToGuess + " seconds left");
-		timeToGuess--;
-	} else {
-		timesUp();
-	}
-}
-
-// when time is up add to wrong answer, reset timer and show the answer
-function timesUp(){
-	wrongAnswers++;
-	resetTimer();
-	showResult("Time's Up! The correct answer was " + currentQuestion.answers[currentQuestion.correctAnswer], "timesUp");
-}
-
-// reset the timer and start over. 
-function resetTimer(){
-	clearInterval(timer);
-    timeToGuess = questionLength;
-    // use this to display 10 Seconds before the timer starts.
-	$("#timer").html(questionLength + " seconds left");
-}
+$(document).ready(newGame);
 
 
 // get a new game setup
@@ -55,7 +32,7 @@ function newGame(){
     $("#startGame").off().on("click", newQuestion);
 
     // display welcome
-    $("#questionText").html('You have 10 seconds to answer each question!<br>Click Play The Game when ready.');
+    $("#questionText").html('You have 10 seconds to answer each question!<br>Click when ready...');
 
 
     // hide and empty everthing
@@ -137,8 +114,8 @@ function showResult(msg, addThisClass){
 		.removeClass()
 		.addClass(addThisClass);
 	setTimeout(newQuestion, displayAnswerSeconds*1000);
-	$("#scoreRight").html("Correct: " + correctAnswers);
-    $("#scoreWrong").html("Incorrect: " + wrongAnswers);
+	$("#scoreRight").html("<h3>" + correctAnswers+ "</h3>");
+    $("#scoreWrong").html("<h3>" + wrongAnswers+ "</h3>");
 
 }
 
@@ -154,8 +131,6 @@ function gameOver(){
     $("#startGame").on("click", newGame);
 
 };
-
-$(document).ready(newGame);
 
 
 
@@ -180,3 +155,30 @@ var questionsmyQuestions = [
 	 	image: "assets/images/questionImages/029.jpg"
 	}
 ];
+
+
+
+// setup the timers
+function showTimer(){
+	if (timeToGuess >= 0){
+		$("#timer").html(timeToGuess + " seconds left");
+		timeToGuess--;
+	} else {
+		timesUp();
+	}
+}
+
+// when time is up add to wrong answer, reset timer and show the answer
+function timesUp(){
+	wrongAnswers++;
+	resetTimer();
+	showResult("Time's Up! The correct answer was " + currentQuestion.answers[currentQuestion.correctAnswer], "timesUp");
+}
+
+// reset the timer and start over. 
+function resetTimer(){
+	clearInterval(timer);
+    timeToGuess = questionLength;
+    // use this to display 10 Seconds before the timer starts.
+	$("#timer").html(questionLength + " seconds left");
+}
