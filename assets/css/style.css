@@ -1,0 +1,90 @@
+
+h1 {
+    font-size: 86px;
+    margin: 0px;
+    padding: 0;
+    position: relative;
+    color: #fff;
+    text-shadow: black -2px 3px 1px;
+}
+.answer {
+	cursor: pointer;
+	margin: 5px;
+}
+#result {
+    display: none;
+    height: auto;
+    width: 100%;
+    background-color: #193441;
+    color: white;
+    font-size: 30px;
+    line-height: 42px;
+    text-align: center;
+    padding: 100px 5px;
+}
+
+#result .gameOverText {
+    display: block;
+}
+
+#questionText {
+    margin: 40px auto;
+    text-align: center;
+    font-size: 24px;
+}
+
+button#newGame {
+    margin-top: 40px;
+    padding: 30px;
+}
+
+#scoreRight, #scoreWrong {
+    text-align: center;
+    padding: 10px;
+    height: 50px;
+    width: 100%;
+    background: black;
+    color: white;
+}
+
+#timer {
+    float: right;
+    text-align: center;
+    padding: 34px 0px;
+    height: 100px;
+    width: 100%;
+    background: black;
+    color: white;
+}
+
+#choices {
+    display: none;
+    text-align: center;
+    font-size: 20px;
+}
+#choices ul {
+    position: relative;
+    list-style: none;
+}
+
+#choices ul li:hover {
+    background-color: red;
+}
+
+
+
+#startGame,  #playAgain {
+    font-size: 48px;
+    background-color: #280207;
+    color: white;
+}
+
+#startGame {
+    text-align: center;
+    display: inline;
+}
+
+#playAgain {
+    text-align: center;
+    display: none;
+}
