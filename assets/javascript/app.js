@@ -63,6 +63,7 @@ function newQuestion(){
 
     if(correctAnswers + wrongAnswers >= gameLength){
         // if you answered all of them end the game.
+
         gameOver();
 	} else {
 		//otherwise pick a question that hasn't been used
@@ -71,9 +72,6 @@ function newQuestion(){
         // remove the asked question from the temp array of questions.
 		myQuestions.splice(questionNumber, 1);
         
-        // rest the timer to 10 seconds
-        resetTimer();
-
         // hide the result from before
         $("#result").empty().hide();
 
@@ -84,7 +82,10 @@ function newQuestion(){
 		$("#choices").show().find(".answer").each(function(i){
 			$(this).html(currentQuestion.answers[i]);
         });
-        
+
+        // rest the timer to 10 seconds
+        resetTimer();
+       
 		// start Question Timer
 		timer = setInterval(showTimer, 1000);
 	}
@@ -114,14 +115,15 @@ function showResult(msg, addThisClass){
 		.removeClass()
 		.addClass(addThisClass);
 	setTimeout(newQuestion, displayAnswerSeconds*1000);
-	$("#scoreRight").html("<h3>" + correctAnswers+ "</h3>");
-    $("#scoreWrong").html("<h3>" + wrongAnswers+ "</h3>");
+	$("#scoreRight").html(correctAnswers);
+    $("#scoreWrong").html(wrongAnswers);
 
 }
 
 function gameOver(){
-    // hide last question
+    // hide last question and choices
     $("#questionText").hide();
+	$("#choices").hide();
 
     // let's tell them how well they did.  Percent success.
 	var score = Math.floor((correctAnswers/gameLength)*100);
@@ -137,22 +139,19 @@ function gameOver(){
 
 var questionsmyQuestions = [
 	{
-	 	question: "What was Tyrion's mother's name?",
-	 	answers: ["Joanna", "Tysha", "Shiera", "No one knows."],
-	 	correctAnswer: 0,
-	 	image: "assets/images/questionImages/000.jpg"
+	 	question: "What year was I born?",
+	 	answers: ["1972", "1963", "1969", "No one knows."],
+	 	correctAnswer: 1
 	},
 	{
-	 	question: "What was Tyrion's first wife's name?",
-	 	answers: ["Joanna", "Tysha", "Shiera", "Milly"],
-	 	correctAnswer: 1,
-	 	image: "assets/images/questionImages/001.jpg"
+	 	question: "What state was I born in?",
+	 	answers: ["New York", "Oregon", "California", "Georgia"],
+	 	correctAnswer: 2
 	},
 	{
-	 	question: "Who won the tourney thrown for Ned Stark's appointment as Hand?",
-	 	answers: ["Loras Tyrell", "Gregor Clegane", "Jaime Lannister", "Sandor Clegane"],
-	 	correctAnswer: 3,
-	 	image: "assets/images/questionImages/029.jpg"
+	 	question: "What was the highest political office I've run for?",
+	 	answers: ["State Sentate", "School Board", "Jr. High Class VP", "Corenor"],
+	 	correctAnswer: 2
 	}
 ];
 
@@ -161,7 +160,7 @@ var questionsmyQuestions = [
 // setup the timers
 function showTimer(){
 	if (timeToGuess >= 0){
-		$("#timer").html(timeToGuess + " seconds left");
+		$("#timer").html(timeToGuess);
 		timeToGuess--;
 	} else {
 		timesUp();
@@ -171,7 +170,8 @@ function showTimer(){
 // when time is up add to wrong answer, reset timer and show the answer
 function timesUp(){
 	wrongAnswers++;
-	resetTimer();
+    resetTimer();
+    $("#choices").hide();
 	showResult("Time's Up! The correct answer was " + currentQuestion.answers[currentQuestion.correctAnswer], "timesUp");
 }
 
@@ -180,5 +180,5 @@ function resetTimer(){
 	clearInterval(timer);
     timeToGuess = questionLength;
     // use this to display 10 Seconds before the timer starts.
-	$("#timer").html(questionLength + " seconds left");
+	$("#timer").html(questionLength);
 }
