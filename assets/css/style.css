@@ -62,6 +62,7 @@ button#startGame {
     width: 100%;
     background: black;
     color: white;
+    min-height: 99px;
 }
 
 #timer {
@@ -107,4 +108,12 @@ p.answer:hover {
 #playAgain {
     text-align: center;
     display: none;
+}
+
+#gameLengthResult {
+    text-align: center;
+}
+
+#output {
+    font-size: 2em;
 }
