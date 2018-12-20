@@ -191,6 +191,34 @@ function gameOver(){
     $("#startGame").off().on("click", newGame);
 };
 
+
+// setup the timers
+function showTimer(){
+	if (timeToGuess >= 1){
+		$("#timeOutputCounter").html(timeToGuess);
+		timeToGuess--;
+	} else {
+		timesUp();
+	}
+}
+
+// when time is up add to wrong answer, reset timer and show the answer
+function timesUp(){
+	wrongAnswers++;
+    resetTimer();
+    $("#choices").hide();
+	showResult("Time's Up! The correct answer was " + currentQuestion.answers[currentQuestion.correctAnswer]);
+}
+
+// reset the timer and start over. 
+function resetTimer(){
+	clearInterval(timer);
+    timeToGuess = questionDuration;
+    // use this to display  Seconds before the timer starts.
+	$("#timeOutputCounter").html("0");
+}
+
+
 var myQuestions = [
 	{
 	 	question: "What year was I born?",
@@ -258,34 +286,6 @@ var myQuestions = [
     {category:"Geography",type:"multiple",difficulty:"medium",question:"How many rivers are in Saudi Arabia?",correctAnswer:0,answers:["0","1","2","3"]}
 
 ];
-
-
-
-// setup the timers
-function showTimer(){
-	if (timeToGuess >= 1){
-		$("#timeOutputCounter").html(timeToGuess);
-		timeToGuess--;
-	} else {
-		timesUp();
-	}
-}
-
-// when time is up add to wrong answer, reset timer and show the answer
-function timesUp(){
-	wrongAnswers++;
-    resetTimer();
-    $("#choices").hide();
-	showResult("Time's Up! The correct answer was " + currentQuestion.answers[currentQuestion.correctAnswer]);
-}
-
-// reset the timer and start over. 
-function resetTimer(){
-	clearInterval(timer);
-    timeToGuess = questionDuration;
-    // use this to display  Seconds before the timer starts.
-	$("#timeOutputCounter").html("0");
-}
 
 
 
