@@ -26,15 +26,26 @@ var myQuestions = [];
 $(document).ready(newGame);
 
 function sliderChange(val) {
-    document.getElementById('output').innerHTML = val;
+    document.getElementById('questionsOutput').innerHTML = val;
     gameLength = parseInt(val);
 }
+
+function timeChange(val) {
+    document.getElementById('timeOutput').innerHTML = val;
+    questionLength = parseInt(val);
+}
+
 
 // get a new game setup
 function newGame(){
     // show gameLength slider
     $("#gameLengthSlider").show();
     $("#gameLengthResult").show();
+
+    $("#gameLengthSlider").show();
+    $("#gameLengthResult").show();
+    $("#questionLengthResult").show();
+    $("#questionLengthResult").show();
     
 
     // show the value of the slider
@@ -45,7 +56,7 @@ function newGame(){
     $("#questionText").show();
 
     // display welcome message
-    $("#questionText").html('You have 10 seconds to answer each question!<br>Click when ready...');
+    $("#questionText").html('You have ' + questionLength + 'seconds to answer each question!<br>Click when ready...');
 
     // hide and empty everthing
     $("#result").hide();
@@ -71,11 +82,12 @@ function newQuestion(){
     // hide the new game button for duration of the game. 
     $("#startGame").hide();
 
-    // hide the slider
+    // hide the sliders
     $("#gameLengthResult").hide();
     $("#gameLengthSlider").hide();
 
-    
+    $("#questionLengthResult").hide();
+    $("#questionLengthResult").hide();
 
     // keep track of how many quesitons have been asked. 
     if(correctAnswers + wrongAnswers >= gameLength){
@@ -155,8 +167,15 @@ function gameOver(){
     // if the game length is less that 20 add one for the next game
     if (gameLength < 20) {
         gameLength++;
-        document.getElementById('output').innerHTML = gameLength;
+        document.getElementById('questionsOutput').innerHTML = gameLength;
         $('#slider').val(gameLength);
+    }
+
+    // if the question duration is greater than 3 seconds remove a second
+    if (questionLength < 20 && questionLength > 4) {
+        questionLength--;
+        document.getElementById('timeOutput').innerHTML = questionLength;
+        $('#time').val(questionLength);
     }
 
     // show the button

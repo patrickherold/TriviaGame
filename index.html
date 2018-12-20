@@ -41,13 +41,27 @@
             <div class="col-12">
                 <div class="well">
                     <div id="questionText"></div>
-                    <div id="gameLengthResult">
-                        <h4>How many questions?</h4>
-                        <output id="output">10</output>
+                    <div class="row">
+                        <div class="col">
+                            <div id="questionLengthResult">
+                                <h4>Seconds per question?</h4>
+                                <output id="timeOutput">10</output>
+                                <div style="text-align:center;" id="questionLengthResult">
+                                    <input id="time" type="range" min="3" max="20" step="1" value="10" oninput="timeChange(this.value)">                        
+                                </div>        
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div id="gameLengthResult">
+                                <h4>How many questions?</h4>
+                                <output id="questionsOutput">10</output>
+                            </div>
+                            <div style="text-align:center;" id="gameLengthSlider">
+                                <input id="slider" type="range" min="3" max="20" step="1" value="10" oninput="sliderChange(this.value)">                        
+                            </div>                
+                        </div>
                     </div>
-                    <div style="text-align:center;" id="gameLengthSlider">
-                        <input id="slider" type="range" min="3" max="20" step="1" value="10" oninput="sliderChange(this.value)">                        
-                    </div>
+                    <hr>
                     <div style="text-align:center;">
                         <button id="startGame">Play The Game</button>
                     </div>

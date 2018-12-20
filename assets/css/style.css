@@ -110,10 +110,10 @@ p.answer:hover {
     display: none;
 }
 
-#gameLengthResult {
+#gameLengthResult, #questionLengthResult {
     text-align: center;
 }
 
-#output {
+#timeOutput, #questionsOutput {
     font-size: 2em;
 }
