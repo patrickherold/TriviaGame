@@ -178,7 +178,7 @@ function gameOver(){
     }
 
     // if the question duration is greater than 3 seconds remove a second
-    if (questionDuration < 20 && questionDuration > 3) {
+    if (questionDuration > 1) {
         questionDuration--;
         document.getElementById('timeOutput').innerHTML = questionDuration;
         $('#timeOutput').val(questionDuration);
