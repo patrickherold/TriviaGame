@@ -13,7 +13,7 @@ var myQuestions = [];
 
 // settings
 // seconds you have to guess
-var questionLength = 10; 
+var questionDuration = 10; 
 // seconds you're shown the answer
 var displayAnswerSeconds = 3; 
 // set this to limit the number of questions per game
@@ -32,7 +32,8 @@ function sliderChange(val) {
 
 function timeChange(val) {
     document.getElementById('timeOutput').innerHTML = val;
-    questionLength = parseInt(val);
+    document.getElementById('timeOutputCounter').innerHTML = val;
+    questionDuration = parseInt(val);
 }
 
 
@@ -44,19 +45,21 @@ function newGame(){
 
     $("#gameLengthSlider").show();
     $("#gameLengthResult").show();
-    $("#questionLengthResult").show();
-    $("#questionLengthResult").show();
+    $("#questionDurationResult").show();
+    $("#questionDurationResult").show();
     
 
     // show the value of the slider
     $("#sliderValue").html('You have ' + gameLength + ' question in this game.<br><small>Move the slider left or right to select more or less quesitons.</small>');
 
 
-    // show question text when getting started
-    $("#questionText").show();
 
-    // display welcome message
-    $("#questionText").html('You have ' + questionLength + 'seconds to answer each question!<br>Click when ready...');
+    // display time per question
+    $("#timeOutput").html(questionDuration);
+    
+    // display time per question countdown
+    $("#timeOutputCounter").html(questionDuration);
+
 
     // hide and empty everthing
     $("#result").hide();
@@ -71,7 +74,7 @@ function newGame(){
     
 	// creates a fresh copy of the questions on each play
 	myQuestions = myQuestions.slice(); 
-	timeToGuess = questionLength;
+	timeToGuess = questionDuration;
 
     // Show the newgame button and when clicked get the first question
     $("#startGame").on("click", newQuestion);
@@ -79,6 +82,9 @@ function newGame(){
 }
 
 function newQuestion(){
+    // show question text when getting started
+    $("#questionText").show();
+
     // hide the new game button for duration of the game. 
     $("#startGame").hide();
 
@@ -86,8 +92,8 @@ function newQuestion(){
     $("#gameLengthResult").hide();
     $("#gameLengthSlider").hide();
 
-    $("#questionLengthResult").hide();
-    $("#questionLengthResult").hide();
+    $("#questionDurationResult").hide();
+    $("#questionDurationResult").hide();
 
     // keep track of how many quesitons have been asked. 
     if(correctAnswers + wrongAnswers >= gameLength){
@@ -115,10 +121,10 @@ function newQuestion(){
             $(this).html(currentQuestion.answers[i]);
         });
 
-        // rest the timer to 10 seconds
+        // rest the timer to __ seconds
         resetTimer();
-       
-		// start Question Timer
+
+        // start Question Timer
         timer = setInterval(showTimer, 1000);
 
         //on button click check the guess you made
@@ -172,11 +178,13 @@ function gameOver(){
     }
 
     // if the question duration is greater than 3 seconds remove a second
-    if (questionLength < 20 && questionLength > 4) {
-        questionLength--;
-        document.getElementById('timeOutput').innerHTML = questionLength;
-        $('#time').val(questionLength);
+    if (questionDuration < 20 && questionDuration > 3) {
+        questionDuration--;
+        document.getElementById('timeOutput').innerHTML = questionDuration;
+        $('#timeOutput').val(questionDuration);
     }
+
+    $("timeOutputCounter").html(questionDuration)
 
     // show the button
     $("#startGame").show();
@@ -255,8 +263,8 @@ var myQuestions = [
 
 // setup the timers
 function showTimer(){
-	if (timeToGuess >= 0){
-		$("#timer").html(timeToGuess);
+	if (timeToGuess >= 1){
+		$("#timeOutputCounter").html(timeToGuess);
 		timeToGuess--;
 	} else {
 		timesUp();
@@ -274,9 +282,9 @@ function timesUp(){
 // reset the timer and start over. 
 function resetTimer(){
 	clearInterval(timer);
-    timeToGuess = questionLength;
-    // use this to display 10 Seconds before the timer starts.
-	$("#timer").html(questionLength);
+    timeToGuess = questionDuration;
+    // use this to display  Seconds before the timer starts.
+	$("#timeOutputCounter").html("0");
 }
 
 

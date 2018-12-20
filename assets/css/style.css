@@ -65,13 +65,14 @@ button#startGame {
     min-height: 99px;
 }
 
-#timer {
+.blackBox {
     float: right;
     text-align: center;
     padding: 30px 0px;
     width: 100%;
     background: black;
     color: white;
+    min-height: 100px;
 }
 
 #choices {
@@ -110,7 +111,7 @@ p.answer:hover {
     display: none;
 }
 
-#gameLengthResult, #questionLengthResult {
+#gameLengthResult, #questionDurationResult {
     text-align: center;
 }
 
